@@ -5,3 +5,17 @@ D
 app/build.gradle.kts,d/2/d2a4383452aad84a18429a5844d31330a012a9e6
 s
 Capp/src/main/java/com/taufik/androidmachinelearning/MainActivity.kt,a/5/a596f5bd9e5d01c8751888ef15f616f4ef7176bc
+Z
+*.idea/modules/Android_Machine_Learning.iml,8/3/83cb772f9e1c821095cb4c8140ecba9131825200
+b
+2.idea/modules/app/Android_Machine_Learning.app.iml,e/1/e19e86c3506dd5dfae56553ecbe56e2ed4939b39
+g
+7.idea/modules/app/Android_Machine_Learning.app.main.iml,9/3/93945b5475cb544f9b6e43b1b9033df160874f77
+n
+>.idea/modules/app/Android_Machine_Learning.app.androidTest.iml,d/1/d1807fe9e9d70cb12272c35eacc056f06ef3d9c9
+k
+;.idea/modules/app/Android_Machine_Learning.app.unitTest.iml,1/7/175888e50f00f94f0749bbef8191efb0d4cb64f1
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8/8/88a9255124c95bdc913197c120a8d560edc59c8e
+S
+#.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
