@@ -16,7 +16,7 @@
             android:name=".onlineimageclassification.activity.CameraActivity"
             android:exported="false" />
         <activity
-            android:name=".onlineimageclassification.activity.MainActivity"
+            android:name=".onlineimageclassification.activity.MainImageClassificationActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
