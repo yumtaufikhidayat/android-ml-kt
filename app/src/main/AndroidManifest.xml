@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AndroidMachineLearning"
         tools:targetApi="31" >
         <activity
-            android:name=".onlineimageclassification.activity.CameraActivity"
+            android:name=".onlineimageclassification.activity.CameraImageClassificationActivity"
             android:exported="false" />
         <activity
             android:name=".onlineimageclassification.activity.MainImageClassificationActivity"
