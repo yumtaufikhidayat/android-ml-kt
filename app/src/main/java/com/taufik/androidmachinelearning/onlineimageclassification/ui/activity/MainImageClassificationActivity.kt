@@ -16,6 +16,7 @@ import com.google.gson.Gson
 import com.taufik.androidmachinelearning.databinding.ActivityMainImageClassificationBinding
 import com.taufik.androidmachinelearning.onlineimageclassification.data.api.ApiConfig
 import com.taufik.androidmachinelearning.onlineimageclassification.data.model.response.FileUploadResponse
+import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.reduceImageFileSize
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
 import com.taufik.androidmachinelearning.onlineimageclassification.ui.activity.CameraImageClassificationActivity.Companion.CAMERAX_RESULT
 import com.taufik.androidmachinelearning.onlineimageclassification.utils.Constants.REQUIRED_PERMISSION
@@ -103,7 +104,7 @@ class MainImageClassificationActivity : AppCompatActivity() {
 
     private fun uploadImage() {
         currentImageUri?.let { uri ->
-            val imageFile = uriToFile(uri, this)
+            val imageFile = uriToFile(uri, this).reduceImageFileSize()
             Log.d("Image Classification File", "showImage: ${imageFile.path}")
             showLoading(true)
 
