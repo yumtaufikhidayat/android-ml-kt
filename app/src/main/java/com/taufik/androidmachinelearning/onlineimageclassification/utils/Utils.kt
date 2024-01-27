@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
+import com.taufik.androidmachinelearning.BuildConfig
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
