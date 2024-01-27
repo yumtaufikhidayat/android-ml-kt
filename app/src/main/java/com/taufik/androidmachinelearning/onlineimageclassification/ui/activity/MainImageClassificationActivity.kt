@@ -36,11 +36,7 @@ class MainImageClassificationActivity : AppCompatActivity() {
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
-            if (isGranted) {
-                this.showToast("Permission request granted")
-            } else {
-                this.showToast("Permission request denied")
-            }
+            if (isGranted) showToast("Permission request granted") else showToast("Permission request denied")
         }
 
     private fun allPermissionsGranted() =
