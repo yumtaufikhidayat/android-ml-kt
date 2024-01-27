@@ -66,4 +66,15 @@ dependencies {
     implementation("androidx.camera:camera-camera2:$cameraXVersion")
     implementation("androidx.camera:camera-lifecycle:$cameraXVersion")
     implementation("androidx.camera:camera-view:$cameraXVersion")
+
+    // Retrofit
+    val retrofitVersion = "2.9.0"
+    val loggingInterceptorVersion = "4.12.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion")
+    
+    // Lifecycle
+    val lifecycleVersion = "2.7.0"
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion") //untuk lifecycleScope
 }
