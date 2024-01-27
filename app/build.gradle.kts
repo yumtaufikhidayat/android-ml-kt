@@ -41,11 +41,15 @@ android {
 
 dependencies {
 
-    // Core
+    // Core + KTX
     val coreKtxVersion = "1.12.0"
     val appCompatVersion = "1.6.1"
-    implementation("androidx.core:core-ktx:$coreKtxVersion")
+    val activityKtxVersion = "1.8.2"
+    val fragmentKtxVersion = "1.6.2"
     implementation("androidx.appcompat:appcompat:$appCompatVersion")
+    implementation("androidx.core:core-ktx:$coreKtxVersion")
+    implementation("androidx.activity:activity-ktx:$activityKtxVersion")
+    implementation("androidx.fragment:fragment-ktx:$fragmentKtxVersion")
 
     // UI
     val materialVersion = "1.11.0"
@@ -66,4 +70,16 @@ dependencies {
     implementation("androidx.camera:camera-camera2:$cameraXVersion")
     implementation("androidx.camera:camera-lifecycle:$cameraXVersion")
     implementation("androidx.camera:camera-view:$cameraXVersion")
+
+    // Retrofit
+    val retrofitVersion = "2.9.0"
+    val loggingInterceptorVersion = "4.12.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion")
+
+    // Lifecycle
+    val lifecycleVersion = "2.7.0"
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion") //untuk lifecycleScope
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
 }

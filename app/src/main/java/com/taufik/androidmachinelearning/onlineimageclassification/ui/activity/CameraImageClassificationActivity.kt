@@ -1,4 +1,4 @@
-package com.taufik.androidmachinelearning.onlineimageclassification.activity
+package com.taufik.androidmachinelearning.onlineimageclassification.ui.activity
 
 import android.content.Intent
 import android.os.Build
