@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.widget.Toast
-import com.taufik.androidmachinelearning.onlineimageclassification.utils.Constants
+import com.taufik.androidmachinelearning.utils.Constants
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -12,6 +12,10 @@ import java.io.FileOutputStream
 object Ext {
     fun Context.showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun Context.showToast(message: String, duration: Int) {
+        Toast.makeText(this, message, duration).show()
     }
 
     fun File.reduceImageFileSize(): File {

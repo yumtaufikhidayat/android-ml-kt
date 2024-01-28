@@ -82,4 +82,8 @@ dependencies {
     val lifecycleVersion = "2.7.0"
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion") //untuk lifecycleScope
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+
+    // MLKit
+    val mlKitVersion = "16.0.0"
+    implementation("com.google.mlkit:text-recognition:$mlKitVersion")
 }
