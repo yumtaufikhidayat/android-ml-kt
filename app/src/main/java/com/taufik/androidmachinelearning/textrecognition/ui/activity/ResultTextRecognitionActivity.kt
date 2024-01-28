@@ -1,11 +1,10 @@
 package com.taufik.androidmachinelearning.textrecognition.ui.activity
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.taufik.androidmachinelearning.R
+import androidx.appcompat.app.AppCompatActivity
 import com.taufik.androidmachinelearning.databinding.ActivityResultTextRecognitionBinding
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
 
@@ -15,7 +14,7 @@ class ResultTextRecognitionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result_text_recognition)
+        setContentView(binding.root)
         getData()
     }
 

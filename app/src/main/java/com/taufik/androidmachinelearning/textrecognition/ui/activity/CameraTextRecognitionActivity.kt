@@ -1,27 +1,40 @@
 package com.taufik.androidmachinelearning.textrecognition.ui.activity
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.taufik.androidmachinelearning.databinding.ActivityCameraTextRecognitionBinding
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
-import com.taufik.androidmachinelearning.utils.Constants
+import com.taufik.androidmachinelearning.utils.Constants.CAMERAX_RESULT
+import com.taufik.androidmachinelearning.utils.Constants.EXTRA_CAMERAX_IMAGE
+import com.taufik.androidmachinelearning.utils.createCustomTempFile
 
 class CameraTextRecognitionActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityCameraTextRecognitionBinding.inflate(layoutInflater) }
-    private var cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    private var imageCapture: ImageCapture? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        binding.switchCamera.setOnClickListener {
+            cameraSelector =
+                if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
+                else CameraSelector.DEFAULT_BACK_CAMERA
+            startCamera()
+        }
+        binding.captureImage.setOnClickListener { takePhoto() }
     }
 
     public override fun onResume() {
@@ -41,19 +54,46 @@ class CameraTextRecognitionActivity : AppCompatActivity() {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
 
+            imageCapture = ImageCapture.Builder().build()
+
             try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
                     this,
                     cameraSelector,
-                    preview
+                    preview,
+                    imageCapture
                 )
 
             } catch (exc: Exception) {
-                showToast("Gagal memunculkan kamera.")
-                Log.e(Constants.TAG_CAMERA_ACTIVITY, "startCamera: ${exc.message}")
+                showToast("Gagal memunculkan kamera. Error: ${exc.message}")
             }
         }, ContextCompat.getMainExecutor(this))
+    }
+
+    private fun takePhoto() {
+        val imageCapture = imageCapture ?: return
+
+        val photoFile = createCustomTempFile(application)
+
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
+        imageCapture.takePicture(
+            outputOptions,
+            ContextCompat.getMainExecutor(this),
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    val intent = Intent()
+                    intent.putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
+                    setResult(CAMERAX_RESULT, intent)
+                    finish()
+                }
+
+                override fun onError(exc: ImageCaptureException) {
+                    showToast("Gagal mengambil gambar. Error: ${exc.message}")
+                }
+            }
+        )
     }
 
     private fun hideSystemUI() {
