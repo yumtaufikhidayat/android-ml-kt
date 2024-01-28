@@ -19,9 +19,9 @@ import com.taufik.androidmachinelearning.onlineimageclassification.data.model.re
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.reduceImageFileSize
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
 import com.taufik.androidmachinelearning.onlineimageclassification.ui.activity.CameraImageClassificationActivity.Companion.CAMERAX_RESULT
-import com.taufik.androidmachinelearning.onlineimageclassification.utils.Constants.REQUIRED_PERMISSION
-import com.taufik.androidmachinelearning.onlineimageclassification.utils.getImageUri
-import com.taufik.androidmachinelearning.onlineimageclassification.utils.uriToFile
+import com.taufik.androidmachinelearning.utils.Constants.REQUIRED_PERMISSION
+import com.taufik.androidmachinelearning.utils.getImageUri
+import com.taufik.androidmachinelearning.utils.uriToFile
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody

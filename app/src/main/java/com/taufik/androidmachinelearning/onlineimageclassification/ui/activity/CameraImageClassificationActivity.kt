@@ -17,7 +17,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.taufik.androidmachinelearning.databinding.ActivityCameraImageClassificationBinding
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
-import com.taufik.androidmachinelearning.onlineimageclassification.utils.createCustomTempFile
+import com.taufik.androidmachinelearning.utils.createCustomTempFile
 
 class CameraImageClassificationActivity : AppCompatActivity() {
 
