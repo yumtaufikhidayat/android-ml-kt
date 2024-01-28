@@ -20,6 +20,15 @@
         android:theme="@style/Theme.AndroidMachineLearning"
         tools:targetApi="31">
         <activity
+            android:name=".translation.ui.activity.ResultTranslationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".translation.ui.activity.CameraTranslationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".textrecognition.ui.activity.MainTextRecognitionActivity"
+            android:exported="false" />
+        <activity
             android:name=".textrecognition.ui.activity.ResultTextRecognitionActivity"
             android:exported="false" />
         <activity
@@ -32,7 +41,7 @@
             android:name=".onlineimageclassification.ui.activity.CameraImageClassificationActivity"
             android:exported="false" />
         <activity
-            android:name=".textrecognition.ui.activity.MainTextRecognitionActivity"
+            android:name=".translation.ui.activity.MainTranslationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
