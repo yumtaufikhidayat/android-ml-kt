@@ -1,4 +1,4 @@
-package com.taufik.androidmachinelearning.onlineimageclassification.utils
+package com.taufik.androidmachinelearning.utils
 
 import android.content.ContentValues
 import android.content.Context

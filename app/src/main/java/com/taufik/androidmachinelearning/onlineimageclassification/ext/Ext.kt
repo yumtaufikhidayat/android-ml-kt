@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.widget.Toast
-import com.taufik.androidmachinelearning.onlineimageclassification.utils.Constants
+import com.taufik.androidmachinelearning.utils.Constants
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
