@@ -14,6 +14,10 @@ object Ext {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    fun Context.showToast(message: String, duration: Int) {
+        Toast.makeText(this, message, duration).show()
+    }
+
     fun File.reduceImageFileSize(): File {
         val file = this
         val bitmap = BitmapFactory.decodeFile(file.path)

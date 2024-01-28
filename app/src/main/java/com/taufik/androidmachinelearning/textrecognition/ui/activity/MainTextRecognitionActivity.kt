@@ -10,6 +10,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.taufik.androidmachinelearning.R
 import com.taufik.androidmachinelearning.databinding.ActivityMainTextRecognitionBinding
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
@@ -110,8 +114,28 @@ class MainTextRecognitionActivity : AppCompatActivity() {
     }
 
     private fun analyzeImage(uri: Uri) {
-        val intent = Intent(this, ResultTextRecognitionActivity::class.java)
-        intent.putExtra(ResultTextRecognitionActivity.EXTRA_IMAGE_URI, currentImageUri.toString())
-        startActivity(intent)
+        showLoading(true)
+        val textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+        val inputImage = InputImage.fromFilePath(this, uri)
+        textRecognizer.process(inputImage)
+            .addOnSuccessListener { visionText ->
+                val detectedText = visionText.text
+                if (detectedText.isBlank()) {
+                    showLoading(false)
+                    showToast(getString(R.string.no_text_recognized))
+                } else {
+                    showLoading(false)
+                    val intent = Intent(this, ResultTextRecognitionActivity::class.java).apply {
+                        putExtra(ResultTextRecognitionActivity.EXTRA_IMAGE_URI, uri.toString())
+                        putExtra(ResultTextRecognitionActivity.EXTRA_RESULT, detectedText)
+                    }
+                    startActivity(intent)
+                }
+            }.addOnFailureListener {
+                showLoading(false)
+                showToast(it.message.toString())
+            }
     }
+
+    private fun showLoading(isShow: Boolean) = binding.progressIndicator.isVisible == isShow
 }
