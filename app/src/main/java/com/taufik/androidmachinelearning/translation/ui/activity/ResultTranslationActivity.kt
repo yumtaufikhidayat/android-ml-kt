@@ -17,7 +17,7 @@ class ResultTranslationActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityResultTranslationBinding.inflate(layoutInflater) }
     private var imageUri: Uri? = null
-    private var detectedText: String = ""
+    private var detectedText = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
