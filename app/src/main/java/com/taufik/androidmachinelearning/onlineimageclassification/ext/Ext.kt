@@ -10,11 +10,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 object Ext {
-    fun Context.showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    fun Context.showToast(message: String, duration: Int) {
+    fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(this, message, duration).show()
     }
 

@@ -84,6 +84,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
 
     // MLKit
-    val mlKitVersion = "16.0.0"
-    implementation("com.google.mlkit:text-recognition:$mlKitVersion")
+    val textRecognitionVersion = "16.0.0"
+    val translateVersion = "17.0.2"
+    implementation("com.google.mlkit:text-recognition:$textRecognitionVersion")
+    implementation("com.google.mlkit:translate:$translateVersion")
 }
