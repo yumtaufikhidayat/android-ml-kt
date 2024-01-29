@@ -1,23 +1,29 @@
 package com.taufik.androidmachinelearning.barcodescanning.ui.activity
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.mlkit.vision.MlKitAnalyzer
+import androidx.camera.view.CameraController.COORDINATE_SYSTEM_VIEW_REFERENCED
+import androidx.camera.view.LifecycleCameraController
 import androidx.core.content.ContextCompat
+import com.google.mlkit.vision.barcode.BarcodeScanner
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.common.Barcode
 import com.taufik.androidmachinelearning.databinding.ActivityCameraBarcodeScanningBinding
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
-import com.taufik.androidmachinelearning.utils.Constants
 
 class CameraBarcodeScanningActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityCameraBarcodeScanningBinding.inflate(layoutInflater) }
-    private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    private lateinit var barcodeScanner: BarcodeScanner
+    private var firstCall = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,28 +37,61 @@ class CameraBarcodeScanningActivity : AppCompatActivity() {
     }
 
     private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        val options = BarcodeScannerOptions.Builder()
+            .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+            .build()
+        barcodeScanner = BarcodeScanning.getClient(options)
 
-        cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-                }
+        val analyzer = MlKitAnalyzer(
+            listOf(barcodeScanner),
+            COORDINATE_SYSTEM_VIEW_REFERENCED,
+            ContextCompat.getMainExecutor(this)
+        ) { result: MlKitAnalyzer.Result ->
+            showResult(result)
+        }
 
-            try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    this,
-                    cameraSelector,
-                    preview
-                )
-            } catch (exc: Exception) {
-                showToast("Gagal memunculkan kamera.")
-                Log.e(Constants.TAG_CAMERA_ACTIVITY, "startCamera: ${exc.message}")
+        val cameraController = LifecycleCameraController(baseContext)
+        cameraController.setImageAnalysisAnalyzer(
+            ContextCompat.getMainExecutor(this),
+            analyzer
+        )
+        cameraController.bindToLifecycle(this)
+        binding.viewFinder.controller = cameraController
+    }
+
+    private fun showResult(result: MlKitAnalyzer.Result?) {
+        if (firstCall) {
+            val barcodeResults = result?.getValue(barcodeScanner)
+            if ((barcodeResults != null) &&
+                (barcodeResults.size != 0) &&
+                (barcodeResults.first() != null)
+            ) {
+                firstCall = false
+                val barcode = barcodeResults[0]
+                val alertDialog = AlertDialog.Builder(this)
+                    .setMessage(barcode.rawValue)
+                    .setPositiveButton("Buka") { _, _ ->
+                        firstCall = false
+                        when (barcode.valueType) {
+                            Barcode.TYPE_URL -> {
+                                val openBrowserIntent = Intent(Intent.ACTION_VIEW)
+                                openBrowserIntent.data = Uri.parse(barcode.url?.url)
+                                startActivity(openBrowserIntent)
+                            }
+                            else -> {
+                                showToast("Unsupported data type")
+                                startCamera()
+                            }
+                        }
+                    }
+                    .setNegativeButton("Scan lagi") { _, _ ->
+                        firstCall = true
+                    }
+                    .setCancelable(false)
+                    .create()
+                alertDialog.show()
             }
-        }, ContextCompat.getMainExecutor(this))
+        }
     }
 
     private fun hideSystemUI() {
@@ -66,5 +105,9 @@ class CameraBarcodeScanningActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+    companion object {
+        const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
     }
 }
