@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -19,6 +21,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidMachineLearning"
         tools:targetApi="31">
+        <activity
+            android:name=".barcodescanning.ui.activity.CameraBarcodeScanningActivity"
+            android:exported="false" />
+        <activity
+            android:name=".barcodescanning.ui.activity.ResultBarcodeScanningActivity"
+            android:exported="false" />
+        <activity
+            android:name=".translation.ui.activity.MainTranslationActivity"
+            android:exported="false" />
         <activity
             android:name=".translation.ui.activity.ResultTranslationActivity"
             android:exported="false" />
@@ -41,7 +52,7 @@
             android:name=".onlineimageclassification.ui.activity.CameraImageClassificationActivity"
             android:exported="false" />
         <activity
-            android:name=".translation.ui.activity.MainTranslationActivity"
+            android:name=".barcodescanning.ui.activity.MainBarcodeScanningActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
