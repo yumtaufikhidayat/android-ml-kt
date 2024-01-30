@@ -6,7 +6,11 @@ import com.taufik.androidmachinelearning.databinding.ActivityMainImageClassifica
 
 class MainImageClassificationTFLiteActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivityMainImageClassificationTfliteBinding.inflate(layoutInflater) }
+    private val binding by lazy {
+        ActivityMainImageClassificationTfliteBinding.inflate(
+            layoutInflater
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
