@@ -87,7 +87,7 @@ dependencies {
     val textRecognitionVersion = "16.0.0"
     val translateVersion = "17.0.2"
     val barcodeScanningVersion = "18.3.0"
-    val visionVersion = "1.4.0-alpha03"
+    val visionVersion = "1.4.0-alpha04"
     implementation("com.google.mlkit:text-recognition:$textRecognitionVersion")
     implementation("com.google.mlkit:translate:$translateVersion")
     implementation("com.google.android.gms:play-services-mlkit-barcode-scanning:$barcodeScanningVersion")
