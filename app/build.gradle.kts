@@ -99,4 +99,7 @@ dependencies {
     // TFLite
     val tfLiteTaskVisionVersion = "0.4.4"
     implementation("org.tensorflow:tensorflow-lite-task-vision:$tfLiteTaskVisionVersion")
+    implementation("org.tensorflow:tensorflow-lite-support:$tfLiteTaskVisionVersion")
+    implementation("org.tensorflow:tensorflow-lite-metadata:$tfLiteTaskVisionVersion")
+    implementation("org.tensorflow:tensorflow-lite-task-vision:$tfLiteTaskVisionVersion")
 }
