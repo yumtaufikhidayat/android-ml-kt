@@ -36,11 +36,14 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        mlModelBinding = true
     }
 }
 
 dependencies {
 
+    implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
+    implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
     // Core + KTX
     val coreKtxVersion = "1.12.0"
     val appCompatVersion = "1.6.1"
@@ -92,4 +95,8 @@ dependencies {
     implementation("com.google.mlkit:translate:$translateVersion")
     implementation("com.google.android.gms:play-services-mlkit-barcode-scanning:$barcodeScanningVersion")
     implementation("androidx.camera:camera-mlkit-vision:$visionVersion")
+
+    // TFLite
+    val tfLiteTaskVisionVersion = "0.4.4"
+    implementation("org.tensorflow:tensorflow-lite-task-vision:$tfLiteTaskVisionVersion")
 }
