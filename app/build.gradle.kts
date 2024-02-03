@@ -99,7 +99,6 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-task-vision:$tfLiteTaskVisionVersion")
     implementation("org.tensorflow:tensorflow-lite-support:$tfLiteTaskVisionVersion")
     implementation("org.tensorflow:tensorflow-lite-metadata:$tfLiteTaskVisionVersion")
-    implementation("org.tensorflow:tensorflow-lite-task-vision:$tfLiteTaskVisionVersion")
     
     // TFLite + Google Play
     val playServiceTFLiteVersion = "16.1.0"
