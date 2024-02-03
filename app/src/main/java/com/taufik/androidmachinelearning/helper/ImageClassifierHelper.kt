@@ -1,4 +1,4 @@
-package com.taufik.androidmachinelearning.imageclassification.helper
+package com.taufik.androidmachinelearning.helper
 
 import android.content.Context
 import android.graphics.Bitmap
