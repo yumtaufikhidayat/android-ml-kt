@@ -48,7 +48,9 @@ class ImageClassifierHelper(
             .setScoreThreshold(threshold)
             .setMaxResults(maxResults)
         val baseOptionsBuilder = BaseOptions.builder()
-            .useGpu()
+            .useNnapi() // using this function can running well for object detection
+//            .setNumThreads(4) // using this function also can running well for object detection as well
+//            .useGpu() // using this function not working while detect object.
         optionsBuilder.setBaseOptions(baseOptionsBuilder.build())
 
         try {
