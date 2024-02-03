@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.taufik.androidmachinelearning.R
 import com.taufik.androidmachinelearning.databinding.ActivityMainImageClassificationUnbundledBinding
-import com.taufik.androidmachinelearning.imageclassification.ui.activity.ResultImageClassificationTFLiteActivity
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
 import com.taufik.androidmachinelearning.utils.Constants
 import com.taufik.androidmachinelearning.utils.getImageUri
@@ -111,8 +110,8 @@ class MainImageClassificationUnbundledActivity : AppCompatActivity() {
     }
 
     private fun analyzeImage(uri: Uri) {
-        val intent = Intent(this, ResultImageClassificationTFLiteActivity::class.java)
-        intent.putExtra(ResultImageClassificationTFLiteActivity.EXTRA_IMAGE_URI, currentImageUri.toString())
+        val intent = Intent(this, ResultImageClassificationUnbundledActivity::class.java)
+        intent.putExtra(ResultImageClassificationUnbundledActivity.EXTRA_IMAGE_URI, currentImageUri.toString())
         startActivity(intent)
     }
 }
