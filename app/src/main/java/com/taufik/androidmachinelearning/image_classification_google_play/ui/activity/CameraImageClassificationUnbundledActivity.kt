@@ -1,4 +1,4 @@
-package com.taufik.androidmachinelearning.imageclassification.ui.activity
+package com.taufik.androidmachinelearning.image_classification_google_play.ui.activity
 
 import android.os.Build
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.taufik.androidmachinelearning.databinding.ActivityCameraImageClassificationTfliteBinding
+import com.taufik.androidmachinelearning.databinding.ActivityCameraImageClassificationUnbundledBinding
 import com.taufik.androidmachinelearning.image_classification_google_play.ui.helper.ImageClassifierHelper
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
 import com.taufik.androidmachinelearning.utils.Constants
@@ -21,12 +21,10 @@ import org.tensorflow.lite.task.gms.vision.classifier.Classifications
 import java.text.NumberFormat
 import java.util.concurrent.Executors
 
-class CameraImageClassificationTFLiteActivity : AppCompatActivity() {
+class CameraImageClassificationUnbundledActivity : AppCompatActivity() {
 
     private val binding by lazy {
-        ActivityCameraImageClassificationTfliteBinding.inflate(
-            layoutInflater
-        )
+        ActivityCameraImageClassificationUnbundledBinding.inflate(layoutInflater)
     }
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private lateinit var imageClassifierHelper: ImageClassifierHelper
@@ -52,6 +50,7 @@ class CameraImageClassificationTFLiteActivity : AppCompatActivity() {
                         showToast(error)
                     }
                 }
+
                 override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
                     runOnUiThread {
                         results?.let { it ->
