@@ -14,10 +14,10 @@ import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.taufik.androidmachinelearning.databinding.ActivityCameraImageClassificationTfliteBinding
-import com.taufik.androidmachinelearning.imageclassification.helper.ImageClassifierHelper
+import com.taufik.androidmachinelearning.image_classification_google_play.ui.helper.ImageClassifierHelper
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
 import com.taufik.androidmachinelearning.utils.Constants
-import org.tensorflow.lite.task.vision.classifier.Classifications
+import org.tensorflow.lite.task.gms.vision.classifier.Classifications
 import java.text.NumberFormat
 import java.util.concurrent.Executors
 
