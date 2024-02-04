@@ -14,10 +14,10 @@ import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.taufik.androidmachinelearning.databinding.ActivityCameraImageClassificationObjectDetectionBinding
-import com.taufik.androidmachinelearning.image_classification_object_detection.helper.ImageClassifierHelper
+import com.taufik.androidmachinelearning.image_classification_object_detection.helper.ObjectDetectorHelper
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
 import com.taufik.androidmachinelearning.utils.Constants
-import org.tensorflow.lite.task.gms.vision.classifier.Classifications
+import org.tensorflow.lite.task.gms.vision.detector.Detection
 import java.text.NumberFormat
 import java.util.concurrent.Executors
 
@@ -27,7 +27,7 @@ class CameraImageClassificationObjectDetectionActivity : AppCompatActivity() {
         ActivityCameraImageClassificationObjectDetectionBinding.inflate(layoutInflater)
     }
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-    private lateinit var imageClassifierHelper: ImageClassifierHelper
+    private lateinit var objectDetectorHelper: ObjectDetectorHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,16 +42,16 @@ class CameraImageClassificationObjectDetectionActivity : AppCompatActivity() {
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-        imageClassifierHelper = ImageClassifierHelper(
+        objectDetectorHelper = ObjectDetectorHelper(
             context = this,
-            classifierListener = object : ImageClassifierHelper.ClassifierListener {
+            detectorListener = object : ObjectDetectorHelper.DetectorListener {
                 override fun onError(error: String) {
                     runOnUiThread {
                         showToast(error)
                     }
                 }
 
-                override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
+                override fun onResults(results: MutableList<Detection>?, inferenceTime: Long) {
                     runOnUiThread {
                         results?.let { it ->
                             if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
@@ -86,7 +86,7 @@ class CameraImageClassificationObjectDetectionActivity : AppCompatActivity() {
                 .build()
                 .also {
                     it.setAnalyzer(Executors.newSingleThreadExecutor()) { image ->
-                        imageClassifierHelper.classifyImage(image)
+                        objectDetectorHelper.detectObject(image)
                     }
                 }
 
