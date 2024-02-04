@@ -18,7 +18,6 @@ import com.taufik.androidmachinelearning.image_classification_object_detection.h
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
 import com.taufik.androidmachinelearning.utils.Constants
 import org.tensorflow.lite.task.gms.vision.detector.Detection
-import java.text.NumberFormat
 import java.util.concurrent.Executors
 
 class CameraImageClassificationObjectDetectionActivity : AppCompatActivity() {
@@ -41,7 +40,6 @@ class CameraImageClassificationObjectDetectionActivity : AppCompatActivity() {
     }
 
     private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         objectDetectorHelper = ObjectDetectorHelper(
             context = this,
             detectorListener = object : ObjectDetectorHelper.DetectorListener {
@@ -51,40 +49,45 @@ class CameraImageClassificationObjectDetectionActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onResults(results: MutableList<Detection>?, inferenceTime: Long) {
+                override fun onResults(
+                    results: MutableList<Detection>?,
+                    inferenceTime: Long,
+                    imageHeight: Int,
+                    imageWidth: Int
+                ) {
                     runOnUiThread {
-                        results?.let { it ->
+                        results?.let {
                             if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
                                 println(it)
-                                val sortedCategories = it[0].categories.sortedByDescending { it?.score }
-                                val displayResult =
-                                    sortedCategories.joinToString("\n") {
-                                        "${it.label} " + NumberFormat.getPercentInstance()
-                                            .format(it.score).trim()
-                                    }
-                                binding.tvResult.text = displayResult
+                                binding.overlay.setResults(
+                                    results,
+                                    imageHeight,
+                                    imageWidth
+                                )
                                 binding.tvInferenceTime.text = "$inferenceTime ms"
                             } else {
-                                binding.tvResult.text = ""
+                                binding.overlay.clear()
                                 binding.tvInferenceTime.text = ""
                             }
                         }
+
+                        // Force a redraw
+                        binding.overlay.invalidate()
                     }
                 }
             }
         )
 
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+
         cameraProviderFuture.addListener({
             val resolutionSelector = ResolutionSelector.Builder()
                 .setAspectRatioStrategy(AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY)
                 .build()
-            val imageAnalyzer = ImageAnalysis.Builder()
-                .setResolutionSelector(resolutionSelector)
+            val imageAnalyzer = ImageAnalysis.Builder().setResolutionSelector(resolutionSelector)
                 .setTargetRotation(binding.viewFinder.display.rotation)
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
-                .build()
-                .also {
+                .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888).build().also {
                     it.setAnalyzer(Executors.newSingleThreadExecutor()) { image ->
                         objectDetectorHelper.detectObject(image)
                     }
@@ -96,12 +99,7 @@ class CameraImageClassificationObjectDetectionActivity : AppCompatActivity() {
             }
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    this,
-                    cameraSelector,
-                    preview,
-                    imageAnalyzer
-                )
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
             } catch (exc: Exception) {
                 showToast("Gagal memunculkan kamera.")
                 Log.e(Constants.TAG_CAMERA_ACTIVITY, "startCamera: ${exc.message}")
