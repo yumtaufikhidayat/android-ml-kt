@@ -22,16 +22,26 @@
         android:theme="@style/Theme.AndroidMachineLearning"
         tools:targetApi="31">
         <activity
-            android:name=".image_classification_google_play.ui.activity.ResultImageClassificationUnbundledActivity"
+            android:name=".image_classification_object_detection.ui.activity.ResultImageClassificationObjectDetectionActivity"
             android:exported="false" />
         <activity
-            android:name=".image_classification_google_play.ui.activity.MainImageClassificationUnbundledActivity"
+            android:name=".image_classification_object_detection.ui.activity.CameraImageClassificationObjectDetectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".image_classification_object_detection.ui.activity.MainImageClassificationObjectDetectionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".image_classification_google_play.ui.activity.ResultImageClassificationUnbundledActivity"
+            android:exported="false" />
+        <activity
+            android:name=".image_classification_google_play.ui.activity.MainImageClassificationUnbundledActivity"
+            android:exported="false">
         </activity>
         <activity
             android:name=".image_classification_google_play.ui.activity.CameraImageClassificationUnbundledActivity"
@@ -77,8 +87,7 @@
             android:exported="false" />
         <activity
             android:name=".imageclassification.ui.activity.MainImageClassificationTFLiteActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
