@@ -100,11 +100,12 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-support:$tfLiteTaskVisionVersion")
     implementation("org.tensorflow:tensorflow-lite-metadata:$tfLiteTaskVisionVersion")
     
-    // TFLite + Google Play
+    // TFLite + Google Play + Prediction
     val playServiceTFLiteVersion = "16.1.0"
     val taskVisionTFLiteServicesVersion = "0.4.2"
     val gmsPlayServicesTFLiteGPUVersion = "16.2.0"
     implementation("com.google.android.gms:play-services-tflite-support:$playServiceTFLiteVersion")
     implementation("org.tensorflow:tensorflow-lite-task-vision-play-services:$taskVisionTFLiteServicesVersion")
+    implementation("com.google.android.gms:play-services-tflite-java:$playServiceTFLiteVersion")
     implementation("com.google.android.gms:play-services-tflite-gpu:$gmsPlayServicesTFLiteGPUVersion")
 }
