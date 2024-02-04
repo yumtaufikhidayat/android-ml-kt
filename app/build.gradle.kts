@@ -108,4 +108,8 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-task-vision-play-services:$taskVisionTFLiteServicesVersion")
     implementation("com.google.android.gms:play-services-tflite-java:$playServiceTFLiteVersion")
     implementation("com.google.android.gms:play-services-tflite-gpu:$gmsPlayServicesTFLiteGPUVersion")
+
+    // MediaPipe
+    val mediaPipeVersion = "0.20230731"
+    implementation("com.google.mediapipe:tasks-vision:$mediaPipeVersion")
 }
