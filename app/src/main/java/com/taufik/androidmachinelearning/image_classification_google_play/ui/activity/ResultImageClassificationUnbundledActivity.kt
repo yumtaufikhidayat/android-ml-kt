@@ -1,10 +1,9 @@
 package com.taufik.androidmachinelearning.image_classification_google_play.ui.activity
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.taufik.androidmachinelearning.R
+import androidx.appcompat.app.AppCompatActivity
 import com.taufik.androidmachinelearning.databinding.ActivityResultImageClassificationUnbundledBinding
 
 class ResultImageClassificationUnbundledActivity : AppCompatActivity() {
