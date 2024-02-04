@@ -13,10 +13,12 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.google.mediapipe.tasks.components.containers.Classifications
 import com.taufik.androidmachinelearning.databinding.ActivityCameraImageClassificationMediaPipeBinding
 import com.taufik.androidmachinelearning.image_classification_mediapipe.helper.ImageClassifierHelper
 import com.taufik.androidmachinelearning.onlineimageclassification.ext.Ext.showToast
 import com.taufik.androidmachinelearning.utils.Constants
+import java.text.NumberFormat
 import java.util.concurrent.Executors
 
 class CameraImageClassificationMediaPipeActivity : AppCompatActivity() {
@@ -40,7 +42,7 @@ class CameraImageClassificationMediaPipeActivity : AppCompatActivity() {
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-        /*imageClassifierHelper = ImageClassifierHelper(
+        imageClassifierHelper = ImageClassifierHelper(
             context = this,
             classifierListener = object : ImageClassifierHelper.ClassifierListener {
                 override fun onError(error: String) {
@@ -52,14 +54,14 @@ class CameraImageClassificationMediaPipeActivity : AppCompatActivity() {
                 override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
                     runOnUiThread {
                         results?.let { it ->
-                            if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
+                            if (it.isNotEmpty() && it[0].categories().isNotEmpty()) {
                                 println(it)
                                 val sortedCategories =
-                                    it[0].categories.sortedByDescending { it?.score }
+                                    it[0].categories().sortedByDescending { it?.score() }
                                 val displayResult =
                                     sortedCategories.joinToString("\n") {
-                                        "${it.label} " + NumberFormat.getPercentInstance()
-                                            .format(it.score).trim()
+                                        "${it.categoryName()} " + NumberFormat.getPercentInstance()
+                                            .format(it.score()).trim()
                                     }
                                 binding.tvResult.text = displayResult
                                 binding.tvInferenceTime.text = "$inferenceTime ms"
@@ -71,7 +73,7 @@ class CameraImageClassificationMediaPipeActivity : AppCompatActivity() {
                     }
                 }
             }
-        )*/
+        )
 
         cameraProviderFuture.addListener({
             val resolutionSelector = ResolutionSelector.Builder()
