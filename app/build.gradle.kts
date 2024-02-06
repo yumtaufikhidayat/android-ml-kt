@@ -113,4 +113,5 @@ dependencies {
     val mediaPipeVersion = "0.20230731"
     implementation("com.google.mediapipe:tasks-vision:$mediaPipeVersion")
     implementation("com.google.mediapipe:tasks-audio:$mediaPipeVersion")
+    implementation("com.google.mediapipe:tasks-text:$mediaPipeVersion")
 }
