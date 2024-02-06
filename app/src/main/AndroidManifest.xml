@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
@@ -21,7 +23,7 @@
         android:theme="@style/Theme.AndroidMachineLearning"
         tools:targetApi="31">
         <activity
-            android:name=".audioclassification.ui.activity.MainAudioClassificationActivity"
+            android:name=".textclassification.ui.activity.MainTextClassificationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,11 +32,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".audioclassification.ui.activity.MainAudioClassificationActivity"
+            android:exported="false"/>
+        <activity
             android:name=".image_classification_mediapipe.ui.ResultImageClassificationMediaPipeActivity"
             android:exported="false" />
         <activity
             android:name=".image_classification_mediapipe.ui.MainImageClassificationMediaPipeActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".image_classification_mediapipe.ui.CameraImageClassificationMediaPipeActivity"
             android:exported="false" />
