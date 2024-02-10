@@ -23,7 +23,7 @@
         android:theme="@style/Theme.AndroidMachineLearning"
         tools:targetApi="31">
         <activity
-            android:name=".smartreply_mlkit.ui.activity.MainSmartReplyActivity"
+            android:name=".bert_question_answer.ui.activity.MainBertQuestionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,8 +32,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".textclassification.ui.activity.MainTextClassificationActivity"
+            android:name=".smartreply_mlkit.ui.activity.MainSmartReplyActivity"
             android:exported="false"/>
+        <activity
+            android:name=".textclassification.ui.activity.MainTextClassificationActivity"
+            android:exported="false" />
         <activity
             android:name=".audioclassification.ui.activity.MainAudioClassificationActivity"
             android:exported="false" />
@@ -133,6 +136,7 @@
                 android:name="photopicker_activity:0:required"
                 android:value="" />
         </service>
+
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="smart_reply" />
