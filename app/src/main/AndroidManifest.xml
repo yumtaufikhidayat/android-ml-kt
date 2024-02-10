@@ -23,7 +23,7 @@
         android:theme="@style/Theme.AndroidMachineLearning"
         tools:targetApi="31">
         <activity
-            android:name=".textclassification.ui.activity.MainTextClassificationActivity"
+            android:name=".smartreply_mlkit.ui.activity.MainSmartReplyActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,8 +32,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".audioclassification.ui.activity.MainAudioClassificationActivity"
+            android:name=".textclassification.ui.activity.MainTextClassificationActivity"
             android:exported="false"/>
+        <activity
+            android:name=".audioclassification.ui.activity.MainAudioClassificationActivity"
+            android:exported="false" />
         <activity
             android:name=".image_classification_mediapipe.ui.ResultImageClassificationMediaPipeActivity"
             android:exported="false" />
@@ -65,10 +68,13 @@
             android:name=".image_classification_google_play.ui.activity.CameraImageClassificationUnbundledActivity"
             android:exported="false" />
         <activity
-            android:name=".imageclassification.ui.activity.CameraImageClassificationTFLiteActivity"
+            android:name=".imageclassification.ui.activity.ResultImageClassificationTFLiteActivity"
             android:exported="false" />
         <activity
-            android:name=".imageclassification.ui.activity.ResultImageClassificationTFLiteActivity"
+            android:name=".imageclassification.ui.activity.MainImageClassificationTFLiteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".imageclassification.ui.activity.CameraImageClassificationTFLiteActivity"
             android:exported="false" />
         <activity
             android:name=".barcodescanning.ui.activity.MainBarcodeScanningActivity"
@@ -89,6 +95,9 @@
             android:name=".translation.ui.activity.CameraTranslationActivity"
             android:exported="false" />
         <activity
+            android:name=".textrecognition.ui.activity.CameraTextRecognitionActivity"
+            android:exported="false" />
+        <activity
             android:name=".textrecognition.ui.activity.MainTextRecognitionActivity"
             android:exported="false" />
         <activity
@@ -98,13 +107,7 @@
             android:name=".onlineimageclassification.ui.activity.MainImageClassificationActivity"
             android:exported="false" />
         <activity
-            android:name=".textrecognition.ui.activity.CameraTextRecognitionActivity"
-            android:exported="false" />
-        <activity
             android:name=".onlineimageclassification.ui.activity.CameraImageClassificationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".imageclassification.ui.activity.MainImageClassificationTFLiteActivity"
             android:exported="false" />
 
         <provider
@@ -130,6 +133,9 @@
                 android:name="photopicker_activity:0:required"
                 android:value="" />
         </service>
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="smart_reply" />
     </application>
 
 </manifest>
