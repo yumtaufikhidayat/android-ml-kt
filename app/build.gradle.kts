@@ -119,9 +119,15 @@ dependencies {
     implementation("com.google.mediapipe:tasks-audio:$mediaPipeVersion")
     implementation("com.google.mediapipe:tasks-text:$mediaPipeVersion")
 
-    // Generative AI
+    // TFLite + Generative AI
     val mlKitSmartReplyVersion = "16.0.0-beta1"
+    val tfLiteTaskTextVersion = "0.3.0"
+    val tfLiteGpuVersion = "2.9.0"
+    val tfLiteGpuDelegatePluginVersion = "0.4.0"
     implementation("com.google.android.gms:play-services-mlkit-smart-reply:$mlKitSmartReplyVersion")
+    implementation("org.tensorflow:tensorflow-lite-task-text:$tfLiteTaskTextVersion")
+    implementation("org.tensorflow:tensorflow-lite-gpu:$tfLiteGpuVersion")
+    implementation("org.tensorflow:tensorflow-lite-gpu-delegate-plugin:$tfLiteGpuDelegatePluginVersion")
 
     // Navigation library
     val navigationVersion = "2.7.7"
