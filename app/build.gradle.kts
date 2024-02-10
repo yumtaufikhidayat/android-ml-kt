@@ -38,6 +38,9 @@ android {
         buildConfig = true
         mlModelBinding = true
     }
+    androidResources {
+        noCompress += "tflite"
+    }
 }
 
 dependencies {
@@ -118,4 +121,13 @@ dependencies {
     // Generative AI
     val mlKitSmartReplyVersion = "16.0.0-beta1"
     implementation("com.google.android.gms:play-services-mlkit-smart-reply:$mlKitSmartReplyVersion")
+
+    // Navigation library
+    val navigationVersion = "2.7.7"
+    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+
+    // GSON library
+    val gsonVersion = "2.10"
+    implementation("com.google.code.gson:gson:$gsonVersion")
 }
