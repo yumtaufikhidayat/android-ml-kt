@@ -114,4 +114,8 @@ dependencies {
     implementation("com.google.mediapipe:tasks-vision:$mediaPipeVersion")
     implementation("com.google.mediapipe:tasks-audio:$mediaPipeVersion")
     implementation("com.google.mediapipe:tasks-text:$mediaPipeVersion")
+
+    // Generative AI
+    val mlKitSmartReplyVersion = "16.0.0-beta1"
+    implementation("com.google.android.gms:play-services-mlkit-smart-reply:$mlKitSmartReplyVersion")
 }
