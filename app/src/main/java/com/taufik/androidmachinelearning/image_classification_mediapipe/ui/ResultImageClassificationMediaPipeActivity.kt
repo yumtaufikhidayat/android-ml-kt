@@ -1,9 +1,9 @@
 package com.taufik.androidmachinelearning.image_classification_mediapipe.ui
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.taufik.androidmachinelearning.databinding.ActivityResultImageClassificationMediaPipeBinding
 
 class ResultImageClassificationMediaPipeActivity : AppCompatActivity() {
