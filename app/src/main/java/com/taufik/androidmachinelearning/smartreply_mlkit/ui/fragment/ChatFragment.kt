@@ -176,7 +176,6 @@ class ChatFragment : Fragment() {
         chatHistory.add(Message("Hey", false, calendar.timeInMillis))
 
         chatViewModel.setMessages(chatHistory)
-
     }
 
     private fun generateSensitiveChatHistory() {
@@ -194,6 +193,10 @@ class ChatFragment : Fragment() {
         chatHistory.add(Message("My cat died", false, calendar.timeInMillis))
 
         chatViewModel.setMessages(chatHistory)
+    }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }
