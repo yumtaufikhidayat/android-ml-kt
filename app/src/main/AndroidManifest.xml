@@ -24,13 +24,7 @@
         tools:targetApi="31">
         <activity
             android:name=".bert_question_answer.ui.activity.MainBertQuestionActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".smartreply_mlkit.ui.activity.MainSmartReplyActivity"
             android:exported="false"/>
@@ -60,7 +54,13 @@
             android:exported="false" />
         <activity
             android:name=".image_classification_object_detection.ui.activity.MainImageClassificationObjectDetectionActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".image_classification_google_play.ui.activity.ResultImageClassificationUnbundledActivity"
             android:exported="false" />
