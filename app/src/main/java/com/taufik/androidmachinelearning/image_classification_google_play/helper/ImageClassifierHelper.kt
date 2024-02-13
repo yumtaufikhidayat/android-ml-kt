@@ -2,6 +2,7 @@ package com.taufik.androidmachinelearning.image_classification_google_play.helpe
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.SystemClock
 import android.util.Log
 import android.view.Surface
@@ -10,6 +11,7 @@ import com.google.android.gms.tflite.client.TfLiteInitializationOptions
 import com.google.android.gms.tflite.gpu.support.TfLiteGpu
 import com.taufik.androidmachinelearning.R
 import org.tensorflow.lite.DataType
+import org.tensorflow.lite.gpu.CompatibilityList
 import org.tensorflow.lite.support.common.ops.CastOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
@@ -47,10 +49,16 @@ class ImageClassifierHelper(
         val optionsBuilder = ImageClassifier.ImageClassifierOptions.builder()
             .setScoreThreshold(threshold)
             .setMaxResults(maxResults)
+
         val baseOptionsBuilder = BaseOptions.builder()
-            .useNnapi() // using this function can running well for object detection
-//            .setNumThreads(4) // using this function also can running well for object detection as well
-//            .useGpu() // using this function not working while detect object.
+        if (CompatibilityList().isDelegateSupportedOnThisDevice){
+            baseOptionsBuilder.useGpu()
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1){
+            baseOptionsBuilder.useNnapi()
+        } else {
+            // Use CPU
+            baseOptionsBuilder.setNumThreads(4)
+        }
         optionsBuilder.setBaseOptions(baseOptionsBuilder.build())
 
         try {
