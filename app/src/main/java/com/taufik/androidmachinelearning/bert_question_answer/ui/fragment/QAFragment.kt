@@ -81,9 +81,7 @@ class QAFragment : Fragment() {
         binding.ibSend.setOnClickListener {
             if (it.isClickable && (binding.tietQuestion.text?.isNotEmpty() == true)) {
                 with(binding.tietQuestion) {
-
                     binding.progressBar.visibility = View.VISIBLE
-
                     val question = this.text.toString()
                     this.text?.clear()
 
@@ -93,24 +91,19 @@ class QAFragment : Fragment() {
                         bertQAHelper.getQuestionAnswer(topicContent, question)
                         binding.progressBar.visibility = View.GONE
                     }
-
                 }
             } else {
                 requireContext().showToast("Harap masukkan sebuah pertanyaan terlebih dahulu")
             }
 
-            val imm = requireContext().getSystemService(
-                Context.INPUT_METHOD_SERVICE
-            ) as InputMethodManager
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(it.windowToken, 0)
-
         }
 
         binding.tvInferenceTime.text = String.format(
             requireContext().getString(R.string.tv_inference_time_label),
             0L
         )
-
     }
 
     private fun initChatHistoryRecyclerView() {
@@ -124,7 +117,6 @@ class QAFragment : Fragment() {
     }
 
     private fun initQuestionSuggestionsRecyclerView() {
-
         if (topicSuggestedQuestions.isNotEmpty()) {
             val decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
             with(binding.rvQuestionSuggestions) {
@@ -134,10 +126,8 @@ class QAFragment : Fragment() {
                         override fun onOptionClicked(optionID: Int) {
                             setQuestion(optionID)
                         }
-
                     })
-                layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 addItemDecoration(decoration)
             }
         } else {
@@ -148,9 +138,7 @@ class QAFragment : Fragment() {
     }
 
     private fun initBertQAModel() {
-
         bertQAHelper = BertQAHelper(requireContext(), object : BertQAHelper.ResultAnswerListener {
-
             override fun onError(error: String) {
                 requireContext().showToast(error)
             }
@@ -166,9 +154,7 @@ class QAFragment : Fragment() {
                     inferenceTime
                 )
             }
-
         })
-
     }
 
     private fun setQuestion(position: Int) {
@@ -186,5 +172,4 @@ class QAFragment : Fragment() {
         bertQAHelper.clearBertQuestionAnswerer()
         super.onDestroy()
     }
-
 }
